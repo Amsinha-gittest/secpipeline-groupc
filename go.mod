@@ -1,3 +1,3 @@
-module github.com/ponnisajeevan12/go-security
+module github.com/Amsinha-gittest/secpipeline-groupc
 
-go 1.20
+go 1.23.3
