@@ -1,3 +1,3 @@
 module github.com/ponnisajeevan12/go-security
 
-go 1.20
+go 3.20
