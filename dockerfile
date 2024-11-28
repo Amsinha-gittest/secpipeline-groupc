@@ -1,29 +1,30 @@
-# Build stage
-FROM golang:1.20-alpine AS builder
+# Stage 1: Build the Go application
+FROM golang:1.23 AS builder
 
-# Set the Current Working Directory inside the container
+# Set the working directory inside the container
 WORKDIR /app
 
 # Copy the Go source code into the container
 COPY . .
 
-# Install dependencies (if any)
+# Download the Go dependencies (if any) and build the application
 RUN go mod tidy
-
-# Build the Go app
 RUN go build -o main .
 
-# Final stage (use a smaller base image for the final container)
-FROM alpine:latest
+# Stage 2: Build the runtime image
+FROM alpine:3.17
 
-# Set the working directory in the final image
-WORKDIR /app
+# Install necessary dependencies (e.g., CA certificates)
+RUN apk --no-cache add ca-certificates
 
-# Copy the binary from the builder stage
+# Set the working directory inside the container
+WORKDIR /root/
+
+# Copy the compiled Go binary from the builder image
 COPY --from=builder /app/main .
 
-# Expose port 80 to be accessible outside the container
+# Expose port 80
 EXPOSE 80
 
-# Command to run the executable
+# Command to run the Go application
 CMD ["./main"]
