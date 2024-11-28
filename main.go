@@ -11,6 +11,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", handler)
-	fmt.Println("Group A Starting server on :80")
+	fmt.Println("Group C Starting server on :80")
 	http.ListenAndServe(":80", nil)
 }

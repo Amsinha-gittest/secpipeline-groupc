@@ -1,5 +1,5 @@
 # Build stage
-FROM golang:1.20-alpine AS builder
+FROM golang:3.20-alpine AS builder
 
 # Set the Current Working Directory inside the container
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Install dependencies (if any)
-# RUN go mod tidy
+RUN go mod tidy
 
 # Build the Go app
 RUN go build -o main .
