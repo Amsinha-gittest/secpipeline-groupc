@@ -1,5 +1,5 @@
 # Build stage
-FROM golang:1.20-alpine AS builder
+FROM golang:3.20-alpine AS builder
 
 # Set the Current Working Directory inside the container
 WORKDIR /app
